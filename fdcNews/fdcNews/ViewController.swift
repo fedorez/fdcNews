@@ -24,8 +24,20 @@ class ViewController: UIViewController {
         myTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: viewModel.reuseID)
         myTableView.delegate = self
         myTableView.dataSource = self
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(pullToRefreshOperations), for: .valueChanged)
+        // this is the replacement of implementing: "collectionView.addSubview(refreshControl)"
+        myTableView.refreshControl = refreshControl
+        
         return myTableView
     }()
+    
+    @objc func pullToRefreshOperations(refreshControl: UIRefreshControl) {
+        print("Refreshing...")
+        fetchNews()
+        refreshControl.endRefreshing()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
