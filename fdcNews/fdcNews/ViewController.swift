@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         
         setupView()
-        fetchNews()
+        fetchNewsCold()
     }
     
     func setupView() {
@@ -74,6 +74,16 @@ class ViewController: UIViewController {
         viewModel.getNews{ (_) in
             self.tableView.reloadData()
         }
+    }
+    
+    func fetchNewsCold() {
+        viewModel.getNewsCold{ (_) in
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        viewModel.saveNews()
     }
 
 }
