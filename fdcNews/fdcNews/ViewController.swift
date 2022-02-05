@@ -45,6 +45,10 @@ class ViewController: UIViewController {
         
         setupView()
         fetchNewsCold()
+        if viewModel.newsVM.count == 0 {
+            fetchNews()
+        }
+        
     }
     
     func setupView() {
