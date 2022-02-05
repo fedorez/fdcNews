@@ -13,6 +13,7 @@ struct News: Decodable {
     let description: String?
     let urlToImage: String?
     let url: String?
+    var views: Int?
 }
 
 struct NewsEnvelop: Decodable {

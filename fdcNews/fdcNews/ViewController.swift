@@ -27,14 +27,14 @@ class ViewController: UIViewController {
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefreshOperations), for: .valueChanged)
-        // this is the replacement of implementing: "collectionView.addSubview(refreshControl)"
+        // this is the replacement of implementing: "myTableView.addSubview(refreshControl)"
         myTableView.refreshControl = refreshControl
         
         return myTableView
     }()
     
     @objc func pullToRefreshOperations(refreshControl: UIRefreshControl) {
-        print("Refreshing...")
+        //print("Refreshing...")
         fetchNews()
         refreshControl.endRefreshing()
     }
@@ -102,7 +102,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         safariViewController.modalPresentationStyle = .fullScreen
         present(safariViewController, animated: true)
         
+        updateViewsCounter(row: indexPath.row)
                 
+    }
+    
+    func updateViewsCounter(row: Int) {
+        if (viewModel.newsVM[row].news.views != nil) {
+            viewModel.newsVM[row].news.views!+=1
+        } else {
+            viewModel.newsVM[row].news.views = 1
+        }
+        self.tableView.reloadData()
     }
 }
 

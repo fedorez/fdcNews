@@ -13,6 +13,7 @@ class NewsTableViewCell: UITableViewCell {
         didSet {
             if let newsVM = newsVM {
                 titleLabel.text = newsVM.title
+                viewsLabel.text = newsVM.views
                 NetworkManager.shared.getImage(urlString: newsVM.urlToImage){(data) in
                     guard let data = data else {
                         return
@@ -45,6 +46,15 @@ class NewsTableViewCell: UITableViewCell {
         myLabel.numberOfLines = 0
         return myLabel
     }()
+    
+    private lazy var viewsLabel: UILabel = {
+        let myLabel = UILabel()
+        myLabel.translatesAutoresizingMaskIntoConstraints = false
+        myLabel.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
+        myLabel.textAlignment = .right
+        myLabel.textColor = .red
+        return myLabel
+    }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,19 +78,29 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     func setupView() {
+        addSubview(viewsLabel)
         addSubview(titleLabel)
         addSubview(newsImage)
         setupConstraints()
     }
     
     func setupConstraints() {
+        //vews number
+        NSLayoutConstraint.activate([
+            viewsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            viewsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            viewsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4),
+            viewsLabel.heightAnchor.constraint(equalToConstant: 10)
+        ])
         //news image
+        
         NSLayoutConstraint.activate([
             newsImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             newsImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            newsImage.topAnchor.constraint(equalTo: topAnchor),
+            newsImage.topAnchor.constraint(equalTo: viewsLabel.bottomAnchor, constant: 8),
             newsImage.heightAnchor.constraint(equalToConstant: 200)
         ])
+         
         //news title
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -88,6 +108,7 @@ class NewsTableViewCell: UITableViewCell {
             titleLabel.topAnchor.constraint(equalTo: newsImage.bottomAnchor, constant: 8 ),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
+         
     }
     
 

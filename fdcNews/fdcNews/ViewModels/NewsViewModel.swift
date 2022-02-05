@@ -10,7 +10,7 @@ import Foundation
 let urlToDefaultImage = "https://www.kindpng.com/picc/m/182-1827064_breaking-news-banner-png-transparent-background-breaking-news.png"
 
 struct NewsViewModel {
-    let news: News
+    var news: News
     
     var author: String {
         return news.author ?? "Unknown"
@@ -30,5 +30,9 @@ struct NewsViewModel {
     
     var urlToImage: String {
         return news.urlToImage ?? urlToDefaultImage
+    }
+    
+    var views: String {
+        return "👁\(news.views ?? 0)"
     }
 }
