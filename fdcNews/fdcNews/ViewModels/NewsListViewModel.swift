@@ -16,11 +16,17 @@ class NewsListViewModel {
     // Ключ, по которому будет происходить сохранение и загрузка хранилища из User Defaults
     let storageKey: String = "fdcnews"
     
+    var pageFethched: Int = 1 {
+        didSet {
+            print("Page fetched set to \(pageFethched)")
+        }
+    }
     
     
     let reuseID = "news"
     
     func getNews(completion: @escaping ([NewsViewModel]) -> Void) {
+        pageFethched = 1
         NetworkManager.shared.getNews { (news) in
             guard let news = news else {
                 return
@@ -44,6 +50,25 @@ class NewsListViewModel {
             DispatchQueue.main.async {
                 self.newsVM = newsVM
                 completion(newsVM)
+            }
+        }
+    }
+    
+    func getNewsPage(completion: @escaping ([NewsViewModel]) -> Void) {
+        NetworkManager.shared.getNewsFromPage(page: pageFethched+1) { (news) in
+            guard let news = news else {
+                return
+            }
+            if news.count > 0 {
+                let newsVM = news.map(NewsViewModel.init)
+                self.pageFethched+=1
+                DispatchQueue.main.async {
+                    self.newsVM.append(contentsOf: newsVM)
+                    self.saveNews()
+                    completion(newsVM)
+                }
+            } else {
+                return
             }
         }
     }

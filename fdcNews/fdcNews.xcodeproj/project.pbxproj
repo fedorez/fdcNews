@@ -20,6 +20,7 @@
 		D19A776427ADB045004DC34A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A776327ADB045004DC34A /* HeaderView.swift */; };
 		D19A776627ADC0B4004DC34A /* ShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A776527ADC0B4004DC34A /* ShadowImageView.swift */; };
 		D19A776827ADC7E7004DC34A /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A776727ADC7E7004DC34A /* NewsTableViewCell.swift */; };
+		D19A776B27AE79B6004DC34A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A776A27AE79B6004DC34A /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D19A776327ADB045004DC34A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		D19A776527ADC0B4004DC34A /* ShadowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowImageView.swift; sourceTree = "<group>"; };
 		D19A776727ADC7E7004DC34A /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		D19A776A27AE79B6004DC34A /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		D19A773F27AD83BF004DC34A /* fdcNews */ = {
 			isa = PBXGroup;
 			children = (
+				D19A776927AE79A2004DC34A /* Aux */,
 				D19A776227ADB01E004DC34A /* Views */,
 				D19A775D27ADAAF4004DC34A /* ViewModels */,
 				D19A775A27AD9F1C004DC34A /* Services */,
@@ -126,6 +129,14 @@
 				D19A776727ADC7E7004DC34A /* NewsTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D19A776927AE79A2004DC34A /* Aux */ = {
+			isa = PBXGroup;
+			children = (
+				D19A776A27AE79B6004DC34A /* Reachability.swift */,
+			);
+			path = Aux;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +211,7 @@
 			files = (
 				D19A775C27AD9FAF004DC34A /* NetworkManager.swift in Sources */,
 				D19A776827ADC7E7004DC34A /* NewsTableViewCell.swift in Sources */,
+				D19A776B27AE79B6004DC34A /* Reachability.swift in Sources */,
 				D19A776427ADB045004DC34A /* HeaderView.swift in Sources */,
 				D19A774527AD83BF004DC34A /* ViewController.swift in Sources */,
 				D19A774127AD83BF004DC34A /* AppDelegate.swift in Sources */,

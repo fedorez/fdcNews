@@ -82,6 +82,12 @@ class ViewController: UIViewController {
         }
     }
     
+    func fetchNewsPage() {
+        viewModel.getNewsPage { (_) in
+            self.tableView.reloadData()
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         viewModel.saveNews()
     }
@@ -102,6 +108,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard Reachability.isConnectedToNetwork() else {
+            return
+        }
+        
         let news = viewModel.newsVM[indexPath.row]
         guard let url = URL(string: news.url) else {
             return
@@ -114,6 +124,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         updateViewsCounter(row: indexPath.row)
                 
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.newsVM.count-1 {
+            print("Last cell reached!")
+            fetchNewsPage()
+        }
     }
     
     func updateViewsCounter(row: Int) {
